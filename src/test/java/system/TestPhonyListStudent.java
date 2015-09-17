@@ -221,5 +221,161 @@ public class TestPhonyListStudent {
 		boolean result = list.equals(otherList);
 		assertEquals(true, result);
 	}
+	
+	/**
+	 * Tests the "equals" method with a bad class
+	 * 
+	 * @see PhonyList#equals(Object o)
+	 * @type Functional
+	 * @oracle It must return false
+	 * @passed Yes
+	 */
+	@Test
+	public void equals_badClass()
+	{
+		PhonyList<Integer> list = thousandElementsList();
+		ArrayList<Integer> otherList = new ArrayList<Integer>();
+		
+		boolean result = list.equals(otherList);
+		assertEquals(false, result);
+	}
+	
+	/**
+	 * Tests the "equals" method with a different size
+	 * 
+	 * @see PhonyList#equals(Object o)
+	 * @type Functional
+	 * @oracle It must return false
+	 * @passed Yes
+	 */
+	@Test
+	public void equals_differentSize()
+	{
+		PhonyList<Integer> list = thousandElementsList();
+		PhonyList<Integer> otherList = new PhonyList<Integer>();
+		otherList.add(4);
+		
+		boolean result = list.equals(otherList);
+		assertEquals(false, result);
+	}
+	
+	/**
+	 * Tests if the "isEmpty" method works with an empty list
+	 * 
+	 * @see PhonyList#isEmpty()
+	 * @type Functional
+	 * @oracle It must return true
+	 * @passed Yes
+	 */
+	@Test
+	public void isEmpty_empty()
+	{
+		PhonyList<Integer> list = new PhonyList<Integer>();
+		
+		boolean result = list.isEmpty();
+		assertEquals(true, result);
+	}
+	
+	/**
+	 * Tests if the "isEmpty" method works with an unempty list
+	 * 
+	 * @see PhonyList#isEmpty()
+	 * @type Functional
+	 * @oracle It must return false
+	 * @passed Yes
+	 */
+	@Test
+	public void isEmpty_filled()
+	{
+		PhonyList<Integer> list = thousandElementsList();
+		
+		boolean result = list.isEmpty();
+		assertEquals(false, result);
+	}
+	
+	/**
+	 * Tests the "get" method with an existing element
+	 * 
+	 * @see PhonyList#get(int index)
+	 * @type Functional
+	 * @oracle It must return the element without error
+	 * @passed Yes
+	 */
+	@Test
+	public void get_existing()
+	{
+		PhonyList<Integer> list = thousandElementsList();
+		
+		Integer result = (Integer) list.get(8);
+		assertEquals((Integer) 9, result);
+	}
+	
+	/**
+	 * Tests the "get" method with an not existing element
+	 * 
+	 * @see PhonyList#get(int index)
+	 * @type Functional
+	 * @oracle It must throw an error
+	 * @passed Yes
+	 */
+	@Test(expected=IndexOutOfBoundsException.class)
+	public void get_notExisting()
+	{
+		PhonyList<Integer> list = thousandElementsList();
+		
+		Integer result = (Integer) list.get(100000);
+		assertEquals((Integer) 9, result);
+	}
+	
+	/**
+	 * Tests the "get" method with a negative position
+	 * 
+	 * @see PhonyList#get(int index)
+	 * @type Functional
+	 * @oracle It must throw an error
+	 * @passed Yes
+	 */
+	@Test(expected=IndexOutOfBoundsException.class)
+	public void get_negPosition()
+	{
+		PhonyList<Integer> list = thousandElementsList();
+		
+		Integer result = (Integer) list.get(-10);
+		assertEquals((Integer) 9, result);
+	}
+	
+	/**
+	 * Tests the "get" method with the first position
+	 * 
+	 * @see PhonyList#get(int index)
+	 * @type Functional
+	 * @oracle It must get the first element
+	 * @passed Yes
+	 */
+	@Test
+	public void get_firstPosition()
+	{
+		PhonyList<Integer> list = thousandElementsList();
+		
+		Integer result = (Integer) list.get(0);
+		assertEquals((Integer) 1, result);
+	}
+	
+	/**
+	 * Tests the "get" method with the last position
+	 * 
+	 * @see PhonyList#get(int index)
+	 * @type Functional
+	 * @oracle It must get the first element
+	 * @passed Yes
+	 */
+	@Test
+	public void get_lastPosition()
+	{
+		PhonyList<Integer> list = thousandElementsList();
+		
+		Integer result = (Integer) list.get(9999);
+		assertEquals((Integer) 10000, result);
+	}
 
 }

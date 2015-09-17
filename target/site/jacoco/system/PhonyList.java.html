@@ -84,13 +84,13 @@ public class PhonyList&lt;E&gt; {
     public boolean equals(Object o) {
 <span class="fc bfc" id="L85" title="All 2 branches covered.">        if (o == this)</span>
 <span class="fc" id="L86">            return true;</span>
-<span class="pc bpc" id="L87" title="1 of 2 branches missed.">        if (!(o instanceof PhonyList))</span>
-<span class="nc" id="L88">            return false;</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">        if (!(o instanceof PhonyList))</span>
+<span class="fc" id="L88">            return false;</span>
 
 <span class="fc" id="L90">        PhonyList list2 = (PhonyList) o;</span>
 
-<span class="pc bpc" id="L92" title="1 of 2 branches missed.">        if (this.size() != list2.size())</span>
-<span class="nc" id="L93">            return false;</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        if (this.size() != list2.size())</span>
+<span class="fc" id="L93">            return false;</span>
 
 <span class="pc bpc" id="L95" title="1 of 2 branches missed.">        for (int i = 0; i &lt; this.size(); i++) {</span>
 <span class="nc" id="L96">            Object o1 = this.get(i);</span>
@@ -163,7 +163,7 @@ public class PhonyList&lt;E&gt; {
      * @return &lt;tt&gt;true&lt;/tt&gt; if this list contains no elements
      */
     public boolean isEmpty() {
-<span class="nc bnc" id="L166" title="All 2 branches missed.">        return size == 0;</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">        return size == 0;</span>
     }
 
     /**
@@ -176,7 +176,7 @@ public class PhonyList&lt;E&gt; {
      * @return &lt;tt&gt;true&lt;/tt&gt; if this list contains the specified element
      */
     public boolean contains(Object o) {
-<span class="fc bfc" id="L179" title="All 2 branches covered.">        return indexOf(o) &gt; 0;</span>
+<span class="fc bfc" id="L179" title="All 2 branches covered.">        return indexOf(o) &gt;= 0;</span>
     }
 
     /**
@@ -203,7 +203,7 @@ public class PhonyList&lt;E&gt; {
 
     @SuppressWarnings(&quot;unchecked&quot;)
     E elementData(int index) {
-<span class="nc" id="L206">        return (E) elementData[index];</span>
+<span class="fc" id="L206">        return (E) elementData[index];</span>
     }
 
     /**
@@ -214,9 +214,9 @@ public class PhonyList&lt;E&gt; {
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     public E get(int index) {
-<span class="nc" id="L217">        rangeCheck(index);</span>
+<span class="fc" id="L217">        rangeCheck(index);</span>
 
-<span class="nc" id="L219">        return elementData(index);</span>
+<span class="fc" id="L219">        return elementData(index);</span>
     }
 
     /**
@@ -369,9 +369,9 @@ public class PhonyList&lt;E&gt; {
      * ArrayIndexOutOfBoundsException if index is negative.
      */
     private void rangeCheck(int index) {
-<span class="nc bnc" id="L372" title="All 2 branches missed.">        if (index &gt;= size)</span>
-<span class="nc" id="L373">            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));</span>
-<span class="nc" id="L374">    }</span>
+<span class="fc bfc" id="L372" title="All 2 branches covered.">        if (index &gt;= size)</span>
+<span class="fc" id="L373">            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));</span>
+<span class="fc" id="L374">    }</span>
 
     /**
      * A version of rangeCheck used by add and addAll.
