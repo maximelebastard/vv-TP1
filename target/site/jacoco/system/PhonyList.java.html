@@ -92,11 +92,11 @@ public class PhonyList&lt;E&gt; {
 <span class="fc bfc" id="L92" title="All 2 branches covered.">        if (this.size() != list2.size())</span>
 <span class="fc" id="L93">            return false;</span>
 
-<span class="pc bpc" id="L95" title="1 of 2 branches missed.">        for (int i = 0; i &lt; this.size(); i++) {</span>
-<span class="nc" id="L96">            Object o1 = this.get(i);</span>
-<span class="nc" id="L97">            Object o2 = list2.get(i);</span>
-<span class="nc bnc" id="L98" title="All 6 branches missed.">            if (!(o1 == null ? o2 == null : o1.equals(o2)))</span>
-<span class="nc" id="L99">                return false;</span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">        for (int i = 0; i &lt; this.size(); i++) {</span>
+<span class="fc" id="L96">            Object o1 = this.get(i);</span>
+<span class="fc" id="L97">            Object o2 = list2.get(i);</span>
+<span class="pc bpc" id="L98" title="3 of 6 branches missed.">            if (!(o1 == null ? o2 == null : o1.equals(o2)))</span>
+<span class="fc" id="L99">                return false;</span>
         }
 
 <span class="fc" id="L102">        return true;</span>
@@ -122,6 +122,11 @@ public class PhonyList&lt;E&gt; {
      * OutOfMemoryError: Requested array size exceeds VM limit
      */
     private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
+    
+    public static int getMaxArraySize()
+    {
+<span class="fc" id="L128">    	return PhonyList.MAX_ARRAY_SIZE;</span>
+    }
 
     /**
      * Increases the capacity to ensure that it can hold at least the number of
@@ -131,20 +136,20 @@ public class PhonyList&lt;E&gt; {
      */
     private void grow(int minCapacity) {
         // overflow-conscious code
-<span class="fc" id="L134">        int oldCapacity = elementData.length;</span>
-<span class="fc" id="L135">        int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</span>
-<span class="fc bfc" id="L136" title="All 2 branches covered.">        if (newCapacity - minCapacity &lt; 0)</span>
-<span class="fc" id="L137">            newCapacity = minCapacity;</span>
-<span class="pc bpc" id="L138" title="1 of 2 branches missed.">        if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span>
-<span class="nc" id="L139">            newCapacity = hugeCapacity(minCapacity);</span>
+<span class="fc" id="L139">        int oldCapacity = elementData.length;</span>
+<span class="fc" id="L140">        int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</span>
+<span class="fc bfc" id="L141" title="All 2 branches covered.">        if (newCapacity - minCapacity &lt; 0)</span>
+<span class="fc" id="L142">            newCapacity = minCapacity;</span>
+<span class="pc bpc" id="L143" title="1 of 2 branches missed.">        if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span>
+<span class="nc" id="L144">            newCapacity = hugeCapacity(minCapacity);</span>
         // minCapacity is usually close to size, so this is a win:
-<span class="fc" id="L141">        elementData = Arrays.copyOf(elementData, newCapacity);</span>
-<span class="fc" id="L142">    }</span>
+<span class="fc" id="L146">        elementData = Arrays.copyOf(elementData, newCapacity);</span>
+<span class="fc" id="L147">    }</span>
 
     private static int hugeCapacity(int minCapacity) {
-<span class="nc bnc" id="L145" title="All 2 branches missed.">        if (minCapacity &lt; 0) // overflow</span>
-<span class="nc" id="L146">            throw new OutOfMemoryError();</span>
-<span class="nc bnc" id="L147" title="All 2 branches missed.">        return (minCapacity &gt; MAX_ARRAY_SIZE) ? Integer.MAX_VALUE</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">        if (minCapacity &lt; 0) // overflow</span>
+<span class="nc" id="L151">            throw new OutOfMemoryError();</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">        return (minCapacity &gt; MAX_ARRAY_SIZE) ? Integer.MAX_VALUE</span>
                 : MAX_ARRAY_SIZE;
     }
 
@@ -154,7 +159,7 @@ public class PhonyList&lt;E&gt; {
      * @return the number of elements in this list
      */
     public int size() {
-<span class="fc" id="L157">        return size;</span>
+<span class="fc" id="L162">        return size;</span>
     }
 
     /**
@@ -163,7 +168,7 @@ public class PhonyList&lt;E&gt; {
      * @return &lt;tt&gt;true&lt;/tt&gt; if this list contains no elements
      */
     public boolean isEmpty() {
-<span class="fc bfc" id="L166" title="All 2 branches covered.">        return size == 0;</span>
+<span class="fc bfc" id="L171" title="All 2 branches covered.">        return size == 0;</span>
     }
 
     /**
@@ -176,7 +181,7 @@ public class PhonyList&lt;E&gt; {
      * @return &lt;tt&gt;true&lt;/tt&gt; if this list contains the specified element
      */
     public boolean contains(Object o) {
-<span class="fc bfc" id="L179" title="All 2 branches covered.">        return indexOf(o) &gt;= 0;</span>
+<span class="fc bfc" id="L184" title="All 2 branches covered.">        return indexOf(o) &gt;= 0;</span>
     }
 
     /**
@@ -187,23 +192,23 @@ public class PhonyList&lt;E&gt; {
      * or -1 if there is no such index.
      */
     public int indexOf(Object o) {
-<span class="fc bfc" id="L190" title="All 2 branches covered.">        if (o == null) {</span>
-<span class="pc bpc" id="L191" title="1 of 2 branches missed.">            for (int i = 0; i &lt; size; i++)</span>
-<span class="fc bfc" id="L192" title="All 2 branches covered.">                if (elementData[i] == null)</span>
-<span class="fc" id="L193">                    return i;</span>
+<span class="fc bfc" id="L195" title="All 2 branches covered.">        if (o == null) {</span>
+<span class="pc bpc" id="L196" title="1 of 2 branches missed.">            for (int i = 0; i &lt; size; i++)</span>
+<span class="fc bfc" id="L197" title="All 2 branches covered.">                if (elementData[i] == null)</span>
+<span class="fc" id="L198">                    return i;</span>
         } else {
-<span class="fc bfc" id="L195" title="All 2 branches covered.">            for (int i = 0; i &lt; size; i++)</span>
-<span class="fc bfc" id="L196" title="All 2 branches covered.">                if (o.equals(elementData[i]))</span>
-<span class="fc" id="L197">                    return i;</span>
+<span class="fc bfc" id="L200" title="All 2 branches covered.">            for (int i = 0; i &lt; size; i++)</span>
+<span class="fc bfc" id="L201" title="All 2 branches covered.">                if (o.equals(elementData[i]))</span>
+<span class="fc" id="L202">                    return i;</span>
         }
-<span class="fc" id="L199">        return -1;</span>
+<span class="fc" id="L204">        return -1;</span>
     }
 
     // Positional Access Operations
 
     @SuppressWarnings(&quot;unchecked&quot;)
     E elementData(int index) {
-<span class="fc" id="L206">        return (E) elementData[index];</span>
+<span class="fc" id="L211">        return (E) elementData[index];</span>
     }
 
     /**
@@ -214,9 +219,9 @@ public class PhonyList&lt;E&gt; {
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     public E get(int index) {
-<span class="fc" id="L217">        rangeCheck(index);</span>
+<span class="fc" id="L222">        rangeCheck(index);</span>
 
-<span class="fc" id="L219">        return elementData(index);</span>
+<span class="fc" id="L224">        return elementData(index);</span>
     }
 
     /**
@@ -229,11 +234,11 @@ public class PhonyList&lt;E&gt; {
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     public E set(int index, E element) {
-<span class="nc" id="L232">        rangeCheck(index);</span>
+<span class="nc" id="L237">        rangeCheck(index);</span>
 
-<span class="nc" id="L234">        E oldValue = elementData(index);</span>
-<span class="nc" id="L235">        elementData[++index] = element;</span>
-<span class="nc" id="L236">        return oldValue;</span>
+<span class="nc" id="L239">        E oldValue = elementData(index);</span>
+<span class="nc" id="L240">        elementData[++index] = element;</span>
+<span class="nc" id="L241">        return oldValue;</span>
     }
 
     /**
@@ -243,9 +248,9 @@ public class PhonyList&lt;E&gt; {
      * @return &lt;tt&gt;true&lt;/tt&gt; (as specified by {@link Collection#add})
      */
     public boolean add(E e) {
-<span class="fc" id="L246">        ensureCapacityInternal(size + 1); // Increments modCount!!</span>
-<span class="fc" id="L247">        elementData[size++] = e;</span>
-<span class="fc" id="L248">        return true;</span>
+<span class="fc" id="L251">        ensureCapacityInternal(size + 1); // Increments modCount!!</span>
+<span class="fc" id="L252">        elementData[size++] = e;</span>
+<span class="fc" id="L253">        return true;</span>
     }
 
     /**
@@ -262,20 +267,20 @@ public class PhonyList&lt;E&gt; {
      * @return &lt;tt&gt;true&lt;/tt&gt; if this list contained the specified element
      */
     public boolean remove(Object o) {
-<span class="nc bnc" id="L265" title="All 2 branches missed.">        if (o == null) {</span>
-<span class="nc bnc" id="L266" title="All 2 branches missed.">            for (int index = 0; index &lt; size; index++)</span>
-<span class="nc bnc" id="L267" title="All 2 branches missed.">                if (elementData[index] != null) {</span>
-<span class="nc" id="L268">                    fastRemove(index);</span>
-<span class="nc" id="L269">                    return true;</span>
+<span class="nc bnc" id="L270" title="All 2 branches missed.">        if (o == null) {</span>
+<span class="nc bnc" id="L271" title="All 2 branches missed.">            for (int index = 0; index &lt; size; index++)</span>
+<span class="nc bnc" id="L272" title="All 2 branches missed.">                if (elementData[index] != null) {</span>
+<span class="nc" id="L273">                    fastRemove(index);</span>
+<span class="nc" id="L274">                    return true;</span>
                 }
         } else {
-<span class="nc bnc" id="L272" title="All 2 branches missed.">            for (int index = 0; index &lt; size; index++)</span>
-<span class="nc bnc" id="L273" title="All 2 branches missed.">                if (o.equals(elementData[index])) {</span>
-<span class="nc" id="L274">                    fastRemove(index);</span>
-<span class="nc" id="L275">                    return true;</span>
+<span class="nc bnc" id="L277" title="All 2 branches missed.">            for (int index = 0; index &lt; size; index++)</span>
+<span class="nc bnc" id="L278" title="All 2 branches missed.">                if (o.equals(elementData[index])) {</span>
+<span class="nc" id="L279">                    fastRemove(index);</span>
+<span class="nc" id="L280">                    return true;</span>
                 }
         }
-<span class="nc" id="L278">        return false;</span>
+<span class="nc" id="L283">        return false;</span>
     }
 
     /*
@@ -283,12 +288,12 @@ public class PhonyList&lt;E&gt; {
      * value removed.
      */
     private void fastRemove(int index) {
-<span class="nc" id="L286">        int numMoved = size - index - 1;</span>
-<span class="nc bnc" id="L287" title="All 2 branches missed.">        if (numMoved &gt; 0)</span>
-<span class="nc" id="L288">            System.arraycopy(elementData, index + 1, elementData, index,</span>
+<span class="nc" id="L291">        int numMoved = size - index - 1;</span>
+<span class="nc bnc" id="L292" title="All 2 branches missed.">        if (numMoved &gt; 0)</span>
+<span class="nc" id="L293">            System.arraycopy(elementData, index + 1, elementData, index,</span>
                     numMoved);
-<span class="nc" id="L290">        elementData[--size] = null; // clear to let GC do its work</span>
-<span class="nc" id="L291">    }</span>
+<span class="nc" id="L295">        elementData[--size] = null; // clear to let GC do its work</span>
+<span class="nc" id="L296">    }</span>
 
     /**
      * Removes all of the elements from this list. The list will be empty after
@@ -296,11 +301,11 @@ public class PhonyList&lt;E&gt; {
      */
     public void clear() {
         // clear to let GC do its work
-<span class="fc bfc" id="L299" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++)</span>
-<span class="fc" id="L300">            elementData[i] = null;</span>
+<span class="fc bfc" id="L304" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++)</span>
+<span class="fc" id="L305">            elementData[i] = null;</span>
 
-<span class="fc" id="L302">        size = 0;</span>
-<span class="fc" id="L303">    }</span>
+<span class="fc" id="L307">        size = 0;</span>
+<span class="fc" id="L308">    }</span>
 
     /**
      * Inserts all of the elements in the specified collection into this list,
@@ -316,24 +321,24 @@ public class PhonyList&lt;E&gt; {
      * @throws NullPointerException      if the specified collection is null
      */
     public boolean addAll(int index, Collection&lt;? extends E&gt; c) {
-<span class="fc" id="L319">        rangeCheckForAdd(index);</span>
+<span class="fc" id="L324">        rangeCheckForAdd(index);</span>
 
-<span class="fc" id="L321">        Object[] a = c.toArray();</span>
-<span class="fc" id="L322">        int numNew = a.length;</span>
-<span class="fc" id="L323">        ensureCapacityInternal(size + numNew); // Increments modCount</span>
+<span class="fc" id="L326">        Object[] a = c.toArray();</span>
+<span class="fc" id="L327">        int numNew = a.length;</span>
+<span class="fc" id="L328">        ensureCapacityInternal(size + numNew); // Increments modCount</span>
 
-<span class="fc" id="L325">        int numMoved = size - index;</span>
-<span class="fc bfc" id="L326" title="All 2 branches covered.">        if (numMoved &gt; 0)</span>
-<span class="fc" id="L327">            System.arraycopy(elementData, index, elementData, index + numNew,</span>
+<span class="fc" id="L330">        int numMoved = size - index;</span>
+<span class="fc bfc" id="L331" title="All 2 branches covered.">        if (numMoved &gt; 0)</span>
+<span class="fc" id="L332">            System.arraycopy(elementData, index, elementData, index + numNew,</span>
                     numMoved);
-<span class="pc bpc" id="L329" title="1 of 2 branches missed.">        else if (numMoved &gt; size) {</span>
-<span class="nc" id="L330">            System.arraycopy(elementData, index, elementData, index + numNew,</span>
+<span class="pc bpc" id="L334" title="1 of 2 branches missed.">        else if (numMoved &gt; size) {</span>
+<span class="nc" id="L335">            System.arraycopy(elementData, index, elementData, index + numNew,</span>
                     numMoved);
         }
 
-<span class="fc" id="L334">        System.arraycopy(a, 0, elementData, index, numNew);</span>
-<span class="fc" id="L335">        size += numNew;</span>
-<span class="fc bfc" id="L336" title="All 2 branches covered.">        return numNew != 0;</span>
+<span class="fc" id="L339">        System.arraycopy(a, 0, elementData, index, numNew);</span>
+<span class="fc" id="L340">        size += numNew;</span>
+<span class="fc bfc" id="L341" title="All 2 branches covered.">        return numNew != 0;</span>
     }
 
     /**
@@ -350,17 +355,17 @@ public class PhonyList&lt;E&gt; {
      *                                   toIndex &lt; fromIndex})
      */
     protected void removeRange(int fromIndex, int toIndex) {
-<span class="nc" id="L353">        int numMoved = size - toIndex;</span>
+<span class="nc" id="L358">        int numMoved = size - toIndex;</span>
 
-<span class="nc" id="L355">        System.arraycopy(elementData, toIndex, elementData, fromIndex, numMoved);</span>
+<span class="nc" id="L360">        System.arraycopy(elementData, toIndex, elementData, fromIndex, numMoved);</span>
 
         // clear to let GC do its work
-<span class="nc" id="L358">        int newSize = size - (toIndex - fromIndex);</span>
-<span class="nc bnc" id="L359" title="All 2 branches missed.">        for (int i = newSize; i &lt; size; i++) {</span>
-<span class="nc" id="L360">            elementData[i] = null;</span>
+<span class="nc" id="L363">        int newSize = size - (toIndex - fromIndex);</span>
+<span class="nc bnc" id="L364" title="All 2 branches missed.">        for (int i = newSize; i &lt; size; i++) {</span>
+<span class="nc" id="L365">            elementData[i] = null;</span>
         }
-<span class="nc" id="L362">        size = newSize;</span>
-<span class="nc" id="L363">    }</span>
+<span class="nc" id="L367">        size = newSize;</span>
+<span class="nc" id="L368">    }</span>
 
     /**
      * Checks if the given index is in range. If not, throws an appropriate
@@ -369,17 +374,17 @@ public class PhonyList&lt;E&gt; {
      * ArrayIndexOutOfBoundsException if index is negative.
      */
     private void rangeCheck(int index) {
-<span class="fc bfc" id="L372" title="All 2 branches covered.">        if (index &gt;= size)</span>
-<span class="fc" id="L373">            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));</span>
-<span class="fc" id="L374">    }</span>
+<span class="fc bfc" id="L377" title="All 2 branches covered.">        if (index &gt;= size)</span>
+<span class="fc" id="L378">            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));</span>
+<span class="fc" id="L379">    }</span>
 
     /**
      * A version of rangeCheck used by add and addAll.
      */
     private void rangeCheckForAdd(int index) {
-<span class="pc bpc" id="L380" title="1 of 4 branches missed.">        if (index &gt; size || index &lt; 0)</span>
-<span class="fc" id="L381">            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));</span>
-<span class="fc" id="L382">    }</span>
+<span class="pc bpc" id="L385" title="1 of 4 branches missed.">        if (index &gt; size || index &lt; 0)</span>
+<span class="fc" id="L386">            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));</span>
+<span class="fc" id="L387">    }</span>
 
     /**
      * Constructs an IndexOutOfBoundsException detail message. Of the many
@@ -387,7 +392,7 @@ public class PhonyList&lt;E&gt; {
      * performs best with both server and client VMs.
      */
     private String outOfBoundsMsg(int index) {
-<span class="fc" id="L390">        return &quot;Index: &quot; + index + &quot;, Size: &quot; + size;</span>
+<span class="fc" id="L395">        return &quot;Index: &quot; + index + &quot;, Size: &quot; + size;</span>
     }
 
     /**
@@ -406,33 +411,33 @@ public class PhonyList&lt;E&gt; {
      * @see Collection#contains(Object)
      */
     public boolean removeAll(Collection&lt;?&gt; c) {
-<span class="nc" id="L409">        return batchRemove(c, false);</span>
+<span class="nc" id="L414">        return batchRemove(c, false);</span>
     }
 
     private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
-<span class="nc" id="L413">        final Object[] elementData = this.elementData;</span>
-<span class="nc" id="L414">        int r = 0, w = 0;</span>
-<span class="nc" id="L415">        boolean modified = false;</span>
+<span class="nc" id="L418">        final Object[] elementData = this.elementData;</span>
+<span class="nc" id="L419">        int r = 0, w = 0;</span>
+<span class="nc" id="L420">        boolean modified = false;</span>
         try {
-<span class="nc bnc" id="L417" title="All 2 branches missed.">            for (; r &lt; size - 1; r++)</span>
-<span class="nc bnc" id="L418" title="All 2 branches missed.">                if (c.contains(elementData[r]) == complement)</span>
-<span class="nc" id="L419">                    elementData[w++] = elementData[r];</span>
+<span class="nc bnc" id="L422" title="All 2 branches missed.">            for (; r &lt; size - 1; r++)</span>
+<span class="nc bnc" id="L423" title="All 2 branches missed.">                if (c.contains(elementData[r]) == complement)</span>
+<span class="nc" id="L424">                    elementData[w++] = elementData[r];</span>
         } finally {
             // Preserve behavioral compatibility with AbstractCollection,
             // even if c.contains() throws.
-<span class="nc bnc" id="L423" title="All 4 branches missed.">            if (r != size) {</span>
-<span class="nc" id="L424">                System.arraycopy(elementData, r, elementData, w, size - r);</span>
-<span class="nc" id="L425">                w += size - r;</span>
+<span class="nc bnc" id="L428" title="All 4 branches missed.">            if (r != size) {</span>
+<span class="nc" id="L429">                System.arraycopy(elementData, r, elementData, w, size - r);</span>
+<span class="nc" id="L430">                w += size - r;</span>
             }
-<span class="nc bnc" id="L427" title="All 4 branches missed.">            if (w != size) {</span>
+<span class="nc bnc" id="L432" title="All 4 branches missed.">            if (w != size) {</span>
                 // clear to let GC do its work
-<span class="nc bnc" id="L429" title="All 4 branches missed.">                for (int i = w; i &lt; size; i++)</span>
-<span class="nc" id="L430">                    elementData[i] = null;</span>
-<span class="nc" id="L431">                size = w;</span>
-<span class="nc" id="L432">                modified = true;</span>
+<span class="nc bnc" id="L434" title="All 4 branches missed.">                for (int i = w; i &lt; size; i++)</span>
+<span class="nc" id="L435">                    elementData[i] = null;</span>
+<span class="nc" id="L436">                size = w;</span>
+<span class="nc" id="L437">                modified = true;</span>
             }
         }
-<span class="nc" id="L435">        return modified;</span>
+<span class="nc" id="L440">        return modified;</span>
     }
 
 }

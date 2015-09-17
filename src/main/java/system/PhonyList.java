@@ -122,6 +122,11 @@ public class PhonyList<E> {
      * OutOfMemoryError: Requested array size exceeds VM limit
      */
     private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
+    
+    public static int getMaxArraySize()
+    {
+    	return PhonyList.MAX_ARRAY_SIZE;
+    }
 
     /**
      * Increases the capacity to ensure that it can hold at least the number of
