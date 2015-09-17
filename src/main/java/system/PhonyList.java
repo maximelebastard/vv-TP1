@@ -237,7 +237,7 @@ public class PhonyList<E> {
         rangeCheck(index);
 
         E oldValue = elementData(index);
-        elementData[++index] = element;
+        elementData[index] = element;
         return oldValue;
     }
 

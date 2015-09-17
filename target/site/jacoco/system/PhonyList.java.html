@@ -125,7 +125,7 @@ public class PhonyList&lt;E&gt; {
     
     public static int getMaxArraySize()
     {
-<span class="fc" id="L128">    	return PhonyList.MAX_ARRAY_SIZE;</span>
+<span class="nc" id="L128">    	return PhonyList.MAX_ARRAY_SIZE;</span>
     }
 
     /**
@@ -234,11 +234,11 @@ public class PhonyList&lt;E&gt; {
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     public E set(int index, E element) {
-<span class="nc" id="L237">        rangeCheck(index);</span>
+<span class="fc" id="L237">        rangeCheck(index);</span>
 
-<span class="nc" id="L239">        E oldValue = elementData(index);</span>
-<span class="nc" id="L240">        elementData[++index] = element;</span>
-<span class="nc" id="L241">        return oldValue;</span>
+<span class="fc" id="L239">        E oldValue = elementData(index);</span>
+<span class="fc" id="L240">        elementData[index] = element;</span>
+<span class="fc" id="L241">        return oldValue;</span>
     }
 
     /**
