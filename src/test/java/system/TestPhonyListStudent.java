@@ -159,14 +159,14 @@ public class TestPhonyListStudent {
 	 * @oracle It must return true
 	 * @passed Yes
 	 */
-	//@Test
-	//public void contains_existingFirst()
-	//{
-	//	PhonyList<Integer> list = thousandElementsList();
-	//	
-	//	boolean result = list.contains(new Integer(1));
-	//	assertEquals(true, result);
-	//}
+	@Test
+	public void contains_existingFirst()
+	{
+		PhonyList<Integer> list = thousandElementsList();
+		
+		boolean result = list.contains(new Integer(1));
+		assertEquals(true, result);
+	}
 	
 	/**
 	 * Tests the "contains" method with the last element
