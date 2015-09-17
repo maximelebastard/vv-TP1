@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PhonyList.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PhonyList</a> &gt; <a href="index.source.html" class="el_package">system</a> &gt; <span class="el_source">PhonyList.java</span></div><h1>PhonyList.java</h1><pre class="source lang-java linenums">package system;
+
+import java.util.Arrays;
+import java.util.Collection;
+
+/**
+ * Implementation of the &lt;tt&gt;List&lt;/tt&gt; interface. Implements all
+ * optional list operations, and permits all elements, including &lt;tt&gt;null&lt;/tt&gt;.
+ * In addition to implementing the &lt;tt&gt;List&lt;/tt&gt; interface, this class provides
+ * methods to manipulate the size of the array that is used internally to store
+ * the list. (This class is roughly equivalent to &lt;tt&gt;Vector&lt;/tt&gt;, except that
+ * it is unsynchronized.)
+ * &lt;p/&gt;
+ * &lt;p/&gt;
+ * Each &lt;tt&gt;PhonyList&lt;/tt&gt; instance has a &lt;i&gt;capacity&lt;/i&gt;. The capacity is
+ * the size of the array used to store the elements in the list. It is always at
+ * least as large as the list size. As elements are added to an PhonyList,
+ * its capacity grows automatically. The details of the growth policy are not
+ * specified beyond the fact that adding an element has constant amortized time
+ * cost.
+ * &lt;p/&gt;
+ * &lt;p/&gt;
+ * An application can increase the capacity of an &lt;tt&gt;PhonyList&lt;/tt&gt;
+ * instance before adding a large number of elements using the
+ * &lt;tt&gt;ensureCapacity&lt;/tt&gt; operation. This may reduce the amount of incremental
+ * reallocation.
+ */
+
+public class PhonyList&lt;E&gt; {
+
+    /**
+     * Default initial capacity.
+     */
+    private static final int DEFAULT_CAPACITY = 10;
+
+    /**
+     * Shared empty array instance used for empty instances.
+     */
+<span class="fc" id="L39">    private static final Object[] EMPTY_ELEMENTDATA = {};</span>
+
+    /**
+     * The array buffer into which the elements of the PhonyList are
+     * stored. The capacity of the PhonyList is the length of this array
+     * buffer. Any empty PhonyList with elementData == EMPTY_ELEMENTDATA
+     * will be expanded to DEFAULT_CAPACITY when the first element is added.
+     */
+    private transient Object[] elementData;
+
+    /**
+     * The size of the PhonyList (the number of elements it contains).
+     *
+     * @serial
+     */
+    private int size;
+
+    /**
+     * Constructs an empty list with an initial capacity of ten.
+     */
+    public PhonyList() {
+<span class="fc" id="L60">        super();</span>
+<span class="fc" id="L61">        this.elementData = EMPTY_ELEMENTDATA;</span>
+<span class="fc" id="L62">    }</span>
+
+    /**
+     * Compares the specified object with this list for equality.  Returns
+     * {@code true} if and only if the specified object is also a list, both
+     * lists have the same size, and all corresponding pairs of elements in
+     * the two lists are &lt;i&gt;equal&lt;/i&gt;.  (Two elements {@code e1} and
+     * {@code e2} are &lt;i&gt;equal&lt;/i&gt; if {@code (e1==null ? e2==null :
+     * e1.equals(e2))}.)  In other words, two lists are defined to be
+     * equal if they contain the same elements in the same order.&lt;p&gt;
+     * &lt;p/&gt;
+     * This implementation first checks if the specified object is this
+     * list. If so, it returns {@code true}; if not, it checks if the
+     * specified object is a list. If not, it returns {@code false}. If so,
+     * it checks if the size of the lists are the same. If not, it returns
+     * {@code false}; if so, it iterates over both lists, comparing corresponding
+     * pairs of elements. If any comparison returns {@code false}, this
+     * method returns {@code false}.  It returns {@code true} when the iterations complete.
+     *
+     * @param o the object to be compared for equality with this list
+     * @return {@code true} if the specified object is equal to this list
+     */
+    public boolean equals(Object o) {
+<span class="fc bfc" id="L85" title="All 2 branches covered.">        if (o == this)</span>
+<span class="fc" id="L86">            return true;</span>
+<span class="pc bpc" id="L87" title="1 of 2 branches missed.">        if (!(o instanceof PhonyList))</span>
+<span class="nc" id="L88">            return false;</span>
+
+<span class="fc" id="L90">        PhonyList list2 = (PhonyList) o;</span>
+
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">        if (this.size() != list2.size())</span>
+<span class="nc" id="L93">            return false;</span>
+
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">        for (int i = 0; i &lt; this.size(); i++) {</span>
+<span class="nc" id="L96">            Object o1 = this.get(i);</span>
+<span class="nc" id="L97">            Object o2 = list2.get(i);</span>
+<span class="nc bnc" id="L98" title="All 6 branches missed.">            if (!(o1 == null ? o2 == null : o1.equals(o2)))</span>
+<span class="nc" id="L99">                return false;</span>
+        }
+
+<span class="fc" id="L102">        return true;</span>
+    }
+
+    private void ensureCapacityInternal(int minCapacity) {
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        if (elementData == EMPTY_ELEMENTDATA) {</span>
+<span class="fc" id="L107">            minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);</span>
+        }
+
+<span class="fc" id="L110">        ensureExplicitCapacity(minCapacity);</span>
+<span class="fc" id="L111">    }</span>
+
+    private void ensureExplicitCapacity(int minCapacity) {
+        // overflow-conscious code
+<span class="fc bfc" id="L115" title="All 2 branches covered.">        if (minCapacity - elementData.length &gt; 0)</span>
+<span class="fc" id="L116">            grow(minCapacity);</span>
+<span class="fc" id="L117">    }</span>
+
+    /**
+     * The maximum size of array to allocate. Some VMs reserve some header words
+     * in an array. Attempts to allocate larger arrays may result in
+     * OutOfMemoryError: Requested array size exceeds VM limit
+     */
+    private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
+
+    /**
+     * Increases the capacity to ensure that it can hold at least the number of
+     * elements specified by the minimum capacity argument.
+     *
+     * @param minCapacity the desired minimum capacity
+     */
+    private void grow(int minCapacity) {
+        // overflow-conscious code
+<span class="fc" id="L134">        int oldCapacity = elementData.length;</span>
+<span class="fc" id="L135">        int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</span>
+<span class="fc bfc" id="L136" title="All 2 branches covered.">        if (newCapacity - minCapacity &lt; 0)</span>
+<span class="fc" id="L137">            newCapacity = minCapacity;</span>
+<span class="pc bpc" id="L138" title="1 of 2 branches missed.">        if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span>
+<span class="nc" id="L139">            newCapacity = hugeCapacity(minCapacity);</span>
+        // minCapacity is usually close to size, so this is a win:
+<span class="fc" id="L141">        elementData = Arrays.copyOf(elementData, newCapacity);</span>
+<span class="fc" id="L142">    }</span>
+
+    private static int hugeCapacity(int minCapacity) {
+<span class="nc bnc" id="L145" title="All 2 branches missed.">        if (minCapacity &lt; 0) // overflow</span>
+<span class="nc" id="L146">            throw new OutOfMemoryError();</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">        return (minCapacity &gt; MAX_ARRAY_SIZE) ? Integer.MAX_VALUE</span>
+                : MAX_ARRAY_SIZE;
+    }
+
+    /**
+     * Returns the number of elements in this list.
+     *
+     * @return the number of elements in this list
+     */
+    public int size() {
+<span class="fc" id="L157">        return size;</span>
+    }
+
+    /**
+     * Returns &lt;tt&gt;true&lt;/tt&gt; if this list contains no elements.
+     *
+     * @return &lt;tt&gt;true&lt;/tt&gt; if this list contains no elements
+     */
+    public boolean isEmpty() {
+<span class="nc bnc" id="L166" title="All 2 branches missed.">        return size == 0;</span>
+    }
+
+    /**
+     * Returns &lt;tt&gt;true&lt;/tt&gt; if this list contains the specified element. More
+     * formally, returns &lt;tt&gt;true&lt;/tt&gt; if and only if this list contains at
+     * least one element &lt;tt&gt;e&lt;/tt&gt; such that
+     * &lt;tt&gt;(o==null&amp;nbsp;?&amp;nbsp;e==null&amp;nbsp;:&amp;nbsp;o.equals(e))&lt;/tt&gt;.
+     *
+     * @param o element whose presence in this list is to be tested
+     * @return &lt;tt&gt;true&lt;/tt&gt; if this list contains the specified element
+     */
+    public boolean contains(Object o) {
+<span class="fc bfc" id="L179" title="All 2 branches covered.">        return indexOf(o) &gt; 0;</span>
+    }
+
+    /**
+     * Returns the index of the first occurrence of the specified element in
+     * this list, or -1 if this list does not contain the element. More
+     * formally, returns the lowest index &lt;tt&gt;i&lt;/tt&gt; such that
+     * &lt;tt&gt;(o==null&amp;nbsp;?&amp;nbsp;get(i)==null&amp;nbsp;:&amp;nbsp;o.equals(get(i)))&lt;/tt&gt;,
+     * or -1 if there is no such index.
+     */
+    public int indexOf(Object o) {
+<span class="fc bfc" id="L190" title="All 2 branches covered.">        if (o == null) {</span>
+<span class="pc bpc" id="L191" title="1 of 2 branches missed.">            for (int i = 0; i &lt; size; i++)</span>
+<span class="fc bfc" id="L192" title="All 2 branches covered.">                if (elementData[i] == null)</span>
+<span class="fc" id="L193">                    return i;</span>
+        } else {
+<span class="fc bfc" id="L195" title="All 2 branches covered.">            for (int i = 0; i &lt; size; i++)</span>
+<span class="fc bfc" id="L196" title="All 2 branches covered.">                if (o.equals(elementData[i]))</span>
+<span class="fc" id="L197">                    return i;</span>
+        }
+<span class="fc" id="L199">        return -1;</span>
+    }
+
+    // Positional Access Operations
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+    E elementData(int index) {
+<span class="nc" id="L206">        return (E) elementData[index];</span>
+    }
+
+    /**
+     * Returns the element at the specified position in this list.
+     *
+     * @param index index of the element to return
+     * @return the element at the specified position in this list
+     * @throws IndexOutOfBoundsException {@inheritDoc}
+     */
+    public E get(int index) {
+<span class="nc" id="L217">        rangeCheck(index);</span>
+
+<span class="nc" id="L219">        return elementData(index);</span>
+    }
+
+    /**
+     * Replaces the element at the specified position in this list with the
+     * specified element.
+     *
+     * @param index   index of the element to replace
+     * @param element element to be stored at the specified position
+     * @return the element previously at the specified position
+     * @throws IndexOutOfBoundsException {@inheritDoc}
+     */
+    public E set(int index, E element) {
+<span class="nc" id="L232">        rangeCheck(index);</span>
+
+<span class="nc" id="L234">        E oldValue = elementData(index);</span>
+<span class="nc" id="L235">        elementData[++index] = element;</span>
+<span class="nc" id="L236">        return oldValue;</span>
+    }
+
+    /**
+     * Appends the specified element to the end of this list.
+     *
+     * @param e element to be appended to this list
+     * @return &lt;tt&gt;true&lt;/tt&gt; (as specified by {@link Collection#add})
+     */
+    public boolean add(E e) {
+<span class="fc" id="L246">        ensureCapacityInternal(size + 1); // Increments modCount!!</span>
+<span class="fc" id="L247">        elementData[size++] = e;</span>
+<span class="fc" id="L248">        return true;</span>
+    }
+
+    /**
+     * Removes the first occurrence of the specified element from this list, if
+     * it is present. If the list does not contain the element, it is unchanged.
+     * More formally, removes the element with the lowest index &lt;tt&gt;i&lt;/tt&gt; such
+     * that
+     * &lt;tt&gt;(o==null&amp;nbsp;?&amp;nbsp;get(i)==null&amp;nbsp;:&amp;nbsp;o.equals(get(i)))&lt;/tt&gt;
+     * (if such an element exists). Returns &lt;tt&gt;true&lt;/tt&gt; if this list contained
+     * the specified element (or equivalently, if this list changed as a result
+     * of the call).
+     *
+     * @param o element to be removed from this list, if present
+     * @return &lt;tt&gt;true&lt;/tt&gt; if this list contained the specified element
+     */
+    public boolean remove(Object o) {
+<span class="nc bnc" id="L265" title="All 2 branches missed.">        if (o == null) {</span>
+<span class="nc bnc" id="L266" title="All 2 branches missed.">            for (int index = 0; index &lt; size; index++)</span>
+<span class="nc bnc" id="L267" title="All 2 branches missed.">                if (elementData[index] != null) {</span>
+<span class="nc" id="L268">                    fastRemove(index);</span>
+<span class="nc" id="L269">                    return true;</span>
+                }
+        } else {
+<span class="nc bnc" id="L272" title="All 2 branches missed.">            for (int index = 0; index &lt; size; index++)</span>
+<span class="nc bnc" id="L273" title="All 2 branches missed.">                if (o.equals(elementData[index])) {</span>
+<span class="nc" id="L274">                    fastRemove(index);</span>
+<span class="nc" id="L275">                    return true;</span>
+                }
+        }
+<span class="nc" id="L278">        return false;</span>
+    }
+
+    /*
+     * Private remove method that skips bounds checking and does not return the
+     * value removed.
+     */
+    private void fastRemove(int index) {
+<span class="nc" id="L286">        int numMoved = size - index - 1;</span>
+<span class="nc bnc" id="L287" title="All 2 branches missed.">        if (numMoved &gt; 0)</span>
+<span class="nc" id="L288">            System.arraycopy(elementData, index + 1, elementData, index,</span>
+                    numMoved);
+<span class="nc" id="L290">        elementData[--size] = null; // clear to let GC do its work</span>
+<span class="nc" id="L291">    }</span>
+
+    /**
+     * Removes all of the elements from this list. The list will be empty after
+     * this call returns.
+     */
+    public void clear() {
+        // clear to let GC do its work
+<span class="fc bfc" id="L299" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++)</span>
+<span class="fc" id="L300">            elementData[i] = null;</span>
+
+<span class="fc" id="L302">        size = 0;</span>
+<span class="fc" id="L303">    }</span>
+
+    /**
+     * Inserts all of the elements in the specified collection into this list,
+     * starting at the specified position. Shifts the element currently at that
+     * position (if any) and any subsequent elements to the right (increases
+     * their indices).
+     *
+     * @param index index at which to insert the first element from the specified
+     *              collection
+     * @param c     collection containing elements to be added to this list
+     * @return &lt;tt&gt;true&lt;/tt&gt; if this list changed as a result of the call
+     * @throws IndexOutOfBoundsException {@inheritDoc}
+     * @throws NullPointerException      if the specified collection is null
+     */
+    public boolean addAll(int index, Collection&lt;? extends E&gt; c) {
+<span class="fc" id="L319">        rangeCheckForAdd(index);</span>
+
+<span class="fc" id="L321">        Object[] a = c.toArray();</span>
+<span class="fc" id="L322">        int numNew = a.length;</span>
+<span class="fc" id="L323">        ensureCapacityInternal(size + numNew); // Increments modCount</span>
+
+<span class="fc" id="L325">        int numMoved = size - index;</span>
+<span class="fc bfc" id="L326" title="All 2 branches covered.">        if (numMoved &gt; 0)</span>
+<span class="fc" id="L327">            System.arraycopy(elementData, index, elementData, index + numNew,</span>
+                    numMoved);
+<span class="pc bpc" id="L329" title="1 of 2 branches missed.">        else if (numMoved &gt; size) {</span>
+<span class="nc" id="L330">            System.arraycopy(elementData, index, elementData, index + numNew,</span>
+                    numMoved);
+        }
+
+<span class="fc" id="L334">        System.arraycopy(a, 0, elementData, index, numNew);</span>
+<span class="fc" id="L335">        size += numNew;</span>
+<span class="fc bfc" id="L336" title="All 2 branches covered.">        return numNew != 0;</span>
+    }
+
+    /**
+     * Removes from this list all of the elements whose index is between
+     * {@code fromIndex}, inclusive, and {@code toIndex}, exclusive. Shifts any
+     * succeeding elements to the left (reduces their index). This call shortens
+     * the list by {@code (toIndex - fromIndex)} elements. (If
+     * {@code toIndex==fromIndex}, this operation has no effect.)
+     *
+     * @throws IndexOutOfBoundsException if {@code fromIndex} or {@code toIndex} is out of range (
+     *                                   {@code fromIndex &lt; 0 ||
+     *                                   fromIndex &gt;= size() ||
+     *                                   toIndex &gt; size() ||
+     *                                   toIndex &lt; fromIndex})
+     */
+    protected void removeRange(int fromIndex, int toIndex) {
+<span class="nc" id="L353">        int numMoved = size - toIndex;</span>
+
+<span class="nc" id="L355">        System.arraycopy(elementData, toIndex, elementData, fromIndex, numMoved);</span>
+
+        // clear to let GC do its work
+<span class="nc" id="L358">        int newSize = size - (toIndex - fromIndex);</span>
+<span class="nc bnc" id="L359" title="All 2 branches missed.">        for (int i = newSize; i &lt; size; i++) {</span>
+<span class="nc" id="L360">            elementData[i] = null;</span>
+        }
+<span class="nc" id="L362">        size = newSize;</span>
+<span class="nc" id="L363">    }</span>
+
+    /**
+     * Checks if the given index is in range. If not, throws an appropriate
+     * runtime exception. This method does *not* check if the index is negative:
+     * It is always used immediately prior to an array access, which throws an
+     * ArrayIndexOutOfBoundsException if index is negative.
+     */
+    private void rangeCheck(int index) {
+<span class="nc bnc" id="L372" title="All 2 branches missed.">        if (index &gt;= size)</span>
+<span class="nc" id="L373">            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));</span>
+<span class="nc" id="L374">    }</span>
+
+    /**
+     * A version of rangeCheck used by add and addAll.
+     */
+    private void rangeCheckForAdd(int index) {
+<span class="pc bpc" id="L380" title="1 of 4 branches missed.">        if (index &gt; size || index &lt; 0)</span>
+<span class="fc" id="L381">            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));</span>
+<span class="fc" id="L382">    }</span>
+
+    /**
+     * Constructs an IndexOutOfBoundsException detail message. Of the many
+     * possible refactorings of the error handling code, this &quot;outlining&quot;
+     * performs best with both server and client VMs.
+     */
+    private String outOfBoundsMsg(int index) {
+<span class="fc" id="L390">        return &quot;Index: &quot; + index + &quot;, Size: &quot; + size;</span>
+    }
+
+    /**
+     * Removes from this list all of its elements that are contained in the
+     * specified collection.
+     *
+     * @param c collection containing elements to be removed from this list
+     * @return {@code true} if this list changed as a result of the call
+     * @throws ClassCastException   if the class of an element of this list is incompatible with
+     *                              the specified collection (&lt;a
+     *                              href=&quot;Collection.html#optional-restrictions&quot;&gt;optional&lt;/a&gt;)
+     * @throws NullPointerException if this list contains a null element and the specified
+     *                              collection does not permit null elements (&lt;a
+     *                              href=&quot;Collection.html#optional-restrictions&quot;&gt;optional&lt;/a&gt;),
+     *                              or if the specified collection is null
+     * @see Collection#contains(Object)
+     */
+    public boolean removeAll(Collection&lt;?&gt; c) {
+<span class="nc" id="L409">        return batchRemove(c, false);</span>
+    }
+
+    private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
+<span class="nc" id="L413">        final Object[] elementData = this.elementData;</span>
+<span class="nc" id="L414">        int r = 0, w = 0;</span>
+<span class="nc" id="L415">        boolean modified = false;</span>
+        try {
+<span class="nc bnc" id="L417" title="All 2 branches missed.">            for (; r &lt; size - 1; r++)</span>
+<span class="nc bnc" id="L418" title="All 2 branches missed.">                if (c.contains(elementData[r]) == complement)</span>
+<span class="nc" id="L419">                    elementData[w++] = elementData[r];</span>
+        } finally {
+            // Preserve behavioral compatibility with AbstractCollection,
+            // even if c.contains() throws.
+<span class="nc bnc" id="L423" title="All 4 branches missed.">            if (r != size) {</span>
+<span class="nc" id="L424">                System.arraycopy(elementData, r, elementData, w, size - r);</span>
+<span class="nc" id="L425">                w += size - r;</span>
+            }
+<span class="nc bnc" id="L427" title="All 4 branches missed.">            if (w != size) {</span>
+                // clear to let GC do its work
+<span class="nc bnc" id="L429" title="All 4 branches missed.">                for (int i = w; i &lt; size; i++)</span>
+<span class="nc" id="L430">                    elementData[i] = null;</span>
+<span class="nc" id="L431">                size = w;</span>
+<span class="nc" id="L432">                modified = true;</span>
+            }
+        }
+<span class="nc" id="L435">        return modified;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>
