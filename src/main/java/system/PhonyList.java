@@ -122,6 +122,11 @@ public class PhonyList<E> {
      * OutOfMemoryError: Requested array size exceeds VM limit
      */
     private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
+    
+    public static int getMaxArraySize()
+    {
+    	return PhonyList.MAX_ARRAY_SIZE;
+    }
 
     /**
      * Increases the capacity to ensure that it can hold at least the number of
@@ -176,7 +181,7 @@ public class PhonyList<E> {
      * @return <tt>true</tt> if this list contains the specified element
      */
     public boolean contains(Object o) {
-        return indexOf(o) > 0;
+        return indexOf(o) >= 0;
     }
 
     /**
@@ -232,7 +237,7 @@ public class PhonyList<E> {
         rangeCheck(index);
 
         E oldValue = elementData(index);
-        elementData[++index] = element;
+        elementData[index] = element;
         return oldValue;
     }
 
