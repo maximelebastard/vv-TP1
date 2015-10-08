@@ -21,3 +21,8 @@ L'ordre des cas de test n'a pas d'importance au sein de la classe. En effet, com
 Question 5
 ---
 Si le résultat du test de add est satisfaisant, nous pouvons considérer que la méthode addBefore fonctionne correctement dans le cadre de l'appel de la fonction add. En revanche, si addBefore est appelée dans d'autres méthodes, il faudra tester toutes les autres méthodes qui utilisent addBefore voire la méthode addBefore elle même pour pouvoir affirmer qu'elle a été suffisamment testée.
+
+Question 6
+---
+Etant donné que les méthodes privées sont utilisées indirectement par les méthodes publiques, un test efficace des méthodes publiques peut être suffisant. La couverture de code n'est pas une bonne métrique, car passer par toutes les méthodes ne signifie pas tester tous les chemins de code possibles. Un test méthodique des cas aux limite des méthodes est plus efficace qu'une couverture à 100% du code.
+Dans certains cas, il peut de toute façon être difficile de couvrir tout le code, notamment lors de l'utilisation de librairies externes.

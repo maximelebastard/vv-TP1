@@ -498,15 +498,15 @@ public class TestPhonyListStudent {
 		assertEquals((Integer) 3, result);
 	}
 	
-	//**
-	// * Tests the "add" method with a huge array size
-	// * 
-	// * @see PhonyList#add(E e)
-	// * @type Functional
-	// * @oracle It must return false
-	// * @passed Yes
-	// */
-	//@Test
+	/**
+	 * Tests the "add" method with a huge array size
+	 * 
+	 * @see PhonyList#add(E e)
+	 * @type Functional
+	 * @oracle It must return false
+	 * @passed Yes
+	 */
+	@Test
 	public void add_hugeArray()
 	{
 		PhonyList<Integer> list = new PhonyList<Integer>();
@@ -518,6 +518,31 @@ public class TestPhonyListStudent {
 		
 		assertEquals(PhonyList.getMaxArraySize(), list.size());
 			
+	}
+	
+	/**
+	 * Tests the "removeAll" method with correct parameters
+	 * 
+	 * @see PhonyList#removeAll(Collection<?> Elements)
+	 * @type Functional
+	 * @oracle It must remove all elements
+	 * @passed No
+	 */
+	@Test(expected=IndexOutOfBoundsException.class)
+	public void removeAll_correct()
+	{
+		PhonyList<Integer> list = thousandElementsList();
+		
+		Integer originalListSize = list.size();
+		
+		ArrayList<Integer> otherList = new ArrayList<Integer>();
+		
+		otherList.add(9999);
+		
+		list.removeAll(otherList);
+		
+		Integer result = (Integer) list.size();
+		assertEquals((Integer) (originalListSize-1), result);
 	}
 
 }

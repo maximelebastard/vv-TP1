@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="24" failures="1" name="system.TestPhonyListStudent" time="0.161" errors="0" skipped="0">
+<testsuite tests="26" failures="3" name="system.TestPhonyListStudent" time="0.172" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-oracle/jre/lib/amd64"/>
@@ -59,23 +59,62 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="system.TestPhonyListStudent" name="addAll_negIndex" time="0.009"/>
-  <testcase classname="system.TestPhonyListStudent" name="contains_existingLast" time="0.001"/>
+  <testcase classname="system.TestPhonyListStudent" name="addAll_negIndex" time="0.006"/>
+  <testcase classname="system.TestPhonyListStudent" name="contains_existingLast" time="0.002"/>
   <testcase classname="system.TestPhonyListStudent" name="equals_nullElement" time="0"/>
   <testcase classname="system.TestPhonyListStudent" name="get_firstPosition" time="0.001"/>
-  <testcase classname="system.TestPhonyListStudent" name="contains_existingFirst" time="0.002"/>
-  <testcase classname="system.TestPhonyListStudent" name="equals_sameInstance" time="0"/>
+  <testcase classname="system.TestPhonyListStudent" name="contains_existingFirst" time="0.001"/>
+  <testcase classname="system.TestPhonyListStudent" name="equals_sameInstance" time="0.002"/>
   <testcase classname="system.TestPhonyListStudent" name="contains_existing" time="0.002"/>
-  <testcase classname="system.TestPhonyListStudent" name="addAll_emptyList" time="0.002"/>
-  <testcase classname="system.TestPhonyListStudent" name="contains_notExisting" time="0.004"/>
+  <testcase classname="system.TestPhonyListStudent" name="addAll_emptyList" time="0.003"/>
+  <testcase classname="system.TestPhonyListStudent" name="contains_notExisting" time="0.003"/>
   <testcase classname="system.TestPhonyListStudent" name="isEmpty_filled" time="0.001"/>
-  <testcase classname="system.TestPhonyListStudent" name="equals_differentLists" time="0.002"/>
-  <testcase classname="system.TestPhonyListStudent" name="get_notExisting" time="0.002"/>
+  <testcase classname="system.TestPhonyListStudent" name="equals_differentLists" time="0.001"/>
+  <testcase classname="system.TestPhonyListStudent" name="get_notExisting" time="0.001"/>
   <testcase classname="system.TestPhonyListStudent" name="get_lastPosition" time="0.001"/>
-  <testcase classname="system.TestPhonyListStudent" name="set_correctElement" time="0.003"/>
-  <testcase classname="system.TestPhonyListStudent" name="isEmpty_empty" time="0.001"/>
-  <testcase classname="system.TestPhonyListStudent" name="get_existing" time="0.001"/>
-  <testcase classname="system.TestPhonyListStudent" name="set_outOfRange" time="0.007">
+  <testcase classname="system.TestPhonyListStudent" name="add_hugeArray" time="0.008">
+    <failure message="expected:&lt;2147483639&gt; but was:&lt;0&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;2147483639&gt; but was:&lt;0&gt;
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:743)
+	at org.junit.Assert.assertEquals(Assert.java:118)
+	at org.junit.Assert.assertEquals(Assert.java:555)
+	at org.junit.Assert.assertEquals(Assert.java:542)
+	at system.TestPhonyListStudent.add_hugeArray(TestPhonyListStudent.java:519)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+</failure>
+  </testcase>
+  <testcase classname="system.TestPhonyListStudent" name="set_correctElement" time="0"/>
+  <testcase classname="system.TestPhonyListStudent" name="isEmpty_empty" time="0"/>
+  <testcase classname="system.TestPhonyListStudent" name="get_existing" time="0.002"/>
+  <testcase classname="system.TestPhonyListStudent" name="set_outOfRange" time="0.001">
     <failure message="Expected exception: java.lang.IndexOutOfBoundsException" type="java.lang.AssertionError">java.lang.AssertionError: Expected exception: java.lang.IndexOutOfBoundsException
 	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:32)
 	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
@@ -101,11 +140,37 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 </failure>
   </testcase>
-  <testcase classname="system.TestPhonyListStudent" name="equals_badClass" time="0.002"/>
-  <testcase classname="system.TestPhonyListStudent" name="equals_nullList" time="0.001"/>
-  <testcase classname="system.TestPhonyListStudent" name="equals_sameLists" time="0.008"/>
+  <testcase classname="system.TestPhonyListStudent" name="equals_badClass" time="0"/>
+  <testcase classname="system.TestPhonyListStudent" name="equals_nullList" time="0"/>
+  <testcase classname="system.TestPhonyListStudent" name="equals_sameLists" time="0.007"/>
+  <testcase classname="system.TestPhonyListStudent" name="removeAll_correct" time="0.003">
+    <failure message="Expected exception: java.lang.IndexOutOfBoundsException" type="java.lang.AssertionError">java.lang.AssertionError: Expected exception: java.lang.IndexOutOfBoundsException
+	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:32)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+</failure>
+  </testcase>
   <testcase classname="system.TestPhonyListStudent" name="equals_differentSize" time="0.001"/>
   <testcase classname="system.TestPhonyListStudent" name="get_negPosition" time="0.001"/>
   <testcase classname="system.TestPhonyListStudent" name="addAll_bigIndex" time="0.002"/>
-  <testcase classname="system.TestPhonyListStudent" name="addAll_regularList" time="0.001"/>
+  <testcase classname="system.TestPhonyListStudent" name="addAll_regularList" time="0.003"/>
 </testsuite>
