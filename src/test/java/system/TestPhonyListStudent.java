@@ -462,15 +462,32 @@ public class TestPhonyListStudent {
 	}
 	
 	/**
-	 * Tests the "set" method with a correct element
+	 * Tests the "set" method with a out of range index
 	 * 
 	 * @see PhonyList#set(int index, Object element)
 	 * @type Functional
-	 * @oracle It must set correctly the element
+	 * @oracle It must throw an out of range error
 	 * @passed Yes
 	 */
 	@Test
 	public void set_correctElement()
+	{
+		PhonyList<Integer> list = thousandElementsList();
+		
+		Integer toSet = new Integer(19);
+		list.set(100, toSet);
+	}
+	
+	/**
+	 * Tests the "set" method with a bad type element
+	 * 
+	 * @see PhonyList#set(int index, Object element)
+	 * @type Functional
+	 * @oracle It must throw an error
+	 * @passed Yes
+	 */
+	@Test(expected=IndexOutOfBoundsException.class)
+	public void set_outOfRange()
 	{
 		PhonyList<Integer> list = thousandElementsList();
 		
@@ -490,17 +507,17 @@ public class TestPhonyListStudent {
 	// * @passed Yes
 	// */
 	//@Test
-	//public void add_hugeArray()
-	//{
-	//	PhonyList<Integer> list = new PhonyList<Integer>();
-	//
-	//	for(int i=0; i<PhonyList.getMaxArraySize() + 1000; i++)
-	//	{
-	//		list.add(i);
-	//	}
-	//	
-	//	assertEquals(PhonyList.getMaxArraySize(), list.size());
-	//		
-	//}
+	public void add_hugeArray()
+	{
+		PhonyList<Integer> list = new PhonyList<Integer>();
+	
+		for(int i=0; i<PhonyList.getMaxArraySize() + 1000; i++)
+		{
+			list.add(i);
+		}
+		
+		assertEquals(PhonyList.getMaxArraySize(), list.size());
+			
+	}
 
 }
